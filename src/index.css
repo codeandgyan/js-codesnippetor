@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  /* === Background Colors (Darkest to Lightest) === */
+  --color-bg0: #0f0f0f; /* Ultra dark base background (e.g. full app body) */
+  --color-bg1: #1e1e1e; /* Primary dark background (editor, top menu) */
+  --color-bg2: #252526; /* Sidebar and output background */
+  --color-bg3: #2d2d2d; /* Panels, popups, hover menus */
+  --color-bg4: #333333; /* Slight contrast for hover states */
+  --color-bg5: #3a3a3a; /* Selected cells, buttons */
+  --color-bg6: #444444; /* Inputs, subtle highlights */
+
+  /* === Border Colors (Dark to Light) === */
+  --color-bd0: #1a1a1a; /* Subtle inner borders */
+  --color-bd1: #2a2a2a; /* Default low-contrast borders */
+  --color-bd2: #3c3c3c; /* Standard cell and panel borders (VS Code match) */
+  --color-bd3: #4d4d4d; /* Section dividers */
+  --color-bd4: #5a5a5a; /* Highlighted border states */
+  --color-bd5: #666666; /* Accent/interactive borders */
+  --color-bd6: #808080; /* High-contrast dividers */
+
+  /* === Foreground/Text Colors (Muted to Brightest) === */
+  --color-fg0: #999999; /* Secondary text, labels, placeholders */
+  --color-fg1: #b3b3b3; /* Dimmed body text */
+  --color-fg2: #cccccc; /* Default readable UI text */
+  --color-fg3: #d4d4d4; /* Main editor text (VS Code style) */
+  --color-fg4: #e5e5e5; /* Bright titles, headings */
+  --color-fg5: #ffffff; /* Pure white for maximum contrast */
+}
