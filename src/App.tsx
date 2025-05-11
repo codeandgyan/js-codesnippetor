@@ -15,7 +15,7 @@ function App() {
         <BodyPanel
           items={[
             {
-              id: "1",
+              id: "yk2bcd",
               type: "code",
               content: "console.log('Hello World')",
               language: "javascript",

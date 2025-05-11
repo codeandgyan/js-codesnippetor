@@ -1,3 +1,4 @@
+import React from "react";
 import type { Cell } from "../../types/cell";
 import CodeBlock from "./CodeBlock";
 
@@ -10,7 +11,9 @@ function BodyPanel({ items }: Readonly<Props>) {
     <div className="bg-bg3 w-full text-fg3">
       <div className="flex flex-col gap-2 h-full p-5">
         {items.map((item) => (
-          <>{item.type === "code" && <CodeBlock item={item} key={item.id} />}</>
+          <React.Fragment key={item.id}>
+            {item.type === "code" && <CodeBlock item={item} />}
+          </React.Fragment>
         ))}
       </div>
     </div>
