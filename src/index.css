@@ -1,6 +1,12 @@
 @import "tailwindcss";
 
 @theme {
+
+  /* Brand Colors */
+  --color-brand-yellow: #ffde59;
+  --color-brand-blue: #5271ff;
+  --font-ubuntu: "Ubuntu";
+
   /* === Background Colors (Darkest to Lightest) === */
   --color-bg0: #0f0f0f; /* Ultra dark base background (e.g. full app body) */
   --color-bg1: #1e1e1e; /* Primary dark background (editor, top menu) */
