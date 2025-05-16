@@ -8,15 +8,15 @@ function OutputBlock({ id, code }: Readonly<Props>) {
   const html = `
    <html>
     <head>
-      <link href="https://fonts.google.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700|Google+Sans:300,400,500,600,700|Google+Sans+Text:400,500,700&amp;display=block" rel="stylesheet">
       <style>
          body {
             margin: 0;
             padding: 0;
             overflow: auto;
             color: #ffffff;
-            font-family: Menlo, sans-serif;
-            font-size: 12px
+            font-size: 14px;
+            font-family: 'Consolas', monospace;
          }
          pre {
             white-space: pre-wrap;
