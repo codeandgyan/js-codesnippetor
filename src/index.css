@@ -4,7 +4,10 @@
   /* Brand Colors */
   --color-brand-yellow: #ffde59;
   --color-brand-blue: #5271ff;
-  --font-ubuntu: "Ubuntu";
+  /* --font-ubuntu: "Ubuntu"; */
+  --font-consolas: "Consolas";
+  --font-roboto: "Roboto";
+  --font-roboto-mono: "Roboto Mono";
 
   /* === Background Colors (Darkest to Lightest) === */
   --color-bg0: #0f0f0f; /* Ultra dark base background (e.g. full app body) */
