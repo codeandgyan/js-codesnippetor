@@ -4,7 +4,7 @@ function TitleMenu() {
       <div className="cursor-pointer hover:text-fg4 flex items-center justify-center gap-3">
         <img src="/YellowDarkLogo.png" className="object-contain max-h-4" />
         <span className="font-ubuntu text-fg5 text-xs">
-          Snippetor
+          JavaScriptPad
         </span>
         <hr className="border-l border-bd5 h-6" />
       </div>
