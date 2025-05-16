@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-
   /* Brand Colors */
   --color-brand-yellow: #ffde59;
   --color-brand-blue: #5271ff;

@@ -10,7 +10,7 @@ function App() {
       <div className="flex-0">
         <TitleMenu />
       </div>
-      <div className="flex-1 flex">
+      <div className="flex-1 flex mt-8">
         <SideBar />
         <BodyPanel
           items={[
