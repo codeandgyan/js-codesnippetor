@@ -17,7 +17,7 @@ function CodeBlock({ item }: Readonly<Props>) {
   };
 
   return (
-    <div className="flex w-full min-h-20 border border-bd3">
+    <div className="flex w-full min-h-20 border border-bd2">
       <div className="p-2 flex bg-bg6">
         <div
           className="bg-bg2 hover:bg-bg3 hover:text-fg2 w-fit h-fit p-2 rounded-lg active:opacity-70 cursor-pointer"
