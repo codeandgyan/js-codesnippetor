@@ -26,25 +26,35 @@
   </head>
   <body>
     <div id="output"></div>
+
     <script>
+      const cellId = "{{CELL-ID-PLACEHOLDER}}";
       function print(...args) {
         const message = args
           .map((arg) => {
             if (typeof arg === "object") {
-              return JSON.stringify(arg, null, 2);
+              return JSON.stringify(arg, null);
+              // If you want to format the JSON nicely, uncomment the line below
+              // return JSON.stringify(arg, null, 2);
             }
             return String(arg);
           })
           .join(" ");
         const output = document.querySelector("#output");
         output.innerHTML += message + "<br>";
+        parent.postMessage(
+          { type: "iframeHeight", height: output.clientHeight, cellId: cellId },
+          "*"
+        );
       }
 
       function printError(...args) {
         const message = args
           .map((arg) => {
             if (typeof arg === "object") {
-              return JSON.stringify(arg, null, 2);
+              return JSON.stringify(arg, null);
+              // If you want to format the JSON nicely, uncomment the line below
+              // return JSON.stringify(arg, null, 2);
             }
             return String(arg);
           })
@@ -52,6 +62,10 @@
         const output = document.querySelector("#output");
         output.innerHTML +=
           "<span style='color: #F87171;'>" + message + "</span>" + "<br>";
+        parent.postMessage(
+          { type: "iframeHeight", height: output.clientHeight, cellId: cellId },
+          "*"
+        );
       }
     </script>
     <script>
@@ -89,7 +103,7 @@
           }
         }
 
-        runCell(`23b80585-059d-4b4e-a4d3-b0c1a36dff0b`);
+        runCell(`{{CODE-PLACEHOLDER}}`);
       } catch (e) {
         printError("⚠️ Error: " + e.message);
         console.error(e);

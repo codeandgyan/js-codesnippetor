@@ -17,9 +17,8 @@ function App() {
   ]);
 
   const onAddBlock = (currentCellId: string, type: string) => {
-    // Write a code to generate a new guid
+    // TODO: currentCellId needs to be considered for inserting the new block after the current cell
     const newId = crypto.randomUUID();
-    // setItems((prev) => [...prev, { id: newId, type, content: "", language: "javascript" }]);
     setItems((prev) => {
       const newItems = [
         ...prev,
@@ -27,8 +26,6 @@ function App() {
       ];
       return newItems;
     });
-
-    console.log("Add block", currentCellId, type);
   };
 
   return (
