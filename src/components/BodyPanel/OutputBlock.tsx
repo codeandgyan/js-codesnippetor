@@ -11,7 +11,7 @@ function OutputBlock({ id, code }: Readonly<Props>) {
     code
   );
   return (
-    <div className="max-h-40 overflow-y-auto flex">
+    <div className="max-h-40 overflow-y-auto flex shadow-lg rounded-b-lg">
       <div className="w-12 place-items-center px-2">
         <MessageSquareCode className="" />
       </div>
