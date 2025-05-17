@@ -47,11 +47,11 @@
         print(...args);
       };
 
-      const error = console.error;
-      console.error = function (...args) {
-        error.apply(console, args);
-        print(...args);
-      };
+      // const error = console.error;
+      // console.error = function (...args) {
+      //   error.apply(console, args);
+      //   print(...args);
+      // };
     </script>
     <script>
       try {
@@ -70,7 +70,8 @@
 
             eval(scopedCode); // run in shared scope
           } catch (err) {
-            console.error("❌ Execution error:", err);
+            console.error(err);
+            print("❌ Execution error:", err.toString());
           }
         }
 
