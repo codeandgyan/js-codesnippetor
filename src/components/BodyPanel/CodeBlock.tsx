@@ -56,7 +56,7 @@ function CodeBlock({ item }: Readonly<Props>) {
   };
 
   return (
-    <>
+    <div className="flex flex-col gap-2 w-full">
       <div className="flex w-full min-h-fit border border-bd2">
         <div className="p-2 flex bg-bg6">
           <button
@@ -96,7 +96,7 @@ function CodeBlock({ item }: Readonly<Props>) {
         </div>
       </div>
       <OutputBlock code={code} id={item.id} />
-    </>
+    </div>
   );
 }
 
