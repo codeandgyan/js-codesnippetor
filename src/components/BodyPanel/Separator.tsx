@@ -1,6 +1,10 @@
 import { Plus } from "lucide-react";
+type Props = {
+  id: string;
+  onAddBlock: (currentCellId: string, type: string) => void;
+};
 
-function Separator() {
+function Separator({ id, onAddBlock }: Readonly<Props>) {
   return (
     <div className="group/separator absolute w-full py-3 h-fit flex flex-col items-center justify-center">
       <hr className="group-hover/separator:border-fg0/80 w-full border border-fg5/20 rounded-sm" />
@@ -11,6 +15,9 @@ function Separator() {
         <button
           className={`border-fg0/80 border rounded-2xl px-2 py-1 bg-bg4 active:bg-bg3 active:scale-95 
             flex gap-1 items-center justify-center text-base text-bright-blue hover:bg-bg5 cursor-pointer`}
+          onClick={() => {
+            onAddBlock(id, "code");
+          }}
         >
           <Plus />
           <span>Add Code</span>
@@ -18,6 +25,9 @@ function Separator() {
         <button
           className={`border-fg0/80 border rounded-2xl px-2 py-1 bg-bg4 active:bg-bg3 active:scale-95 
             flex gap-1 items-center justify-center text-base text-bright-blue hover:bg-bg5 cursor-pointer`}
+          onClick={() => {
+            onAddBlock(id, "text");
+          }}
         >
           <Plus />
           <span>Add Text</span>
