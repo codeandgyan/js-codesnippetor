@@ -39,6 +39,20 @@
         const output = document.querySelector("#output");
         output.innerHTML += message + "<br>";
       }
+
+      function printError(...args) {
+        const message = args
+          .map((arg) => {
+            if (typeof arg === "object") {
+              return JSON.stringify(arg, null, 2);
+            }
+            return String(arg);
+          })
+          .join(" ");
+        const output = document.querySelector("#output");
+        output.innerHTML +=
+          "<span style='color: red;'>" + message + "</span>" + "<br>";
+      }
     </script>
     <script>
       const log = console.log;
@@ -71,13 +85,13 @@
             eval(scopedCode); // run in shared scope
           } catch (err) {
             console.error(err);
-            print("❌ Execution error:", err.toString());
+            printError("❌", err.toString());
           }
         }
 
         runCell(`23b80585-059d-4b4e-a4d3-b0c1a36dff0b`);
       } catch (e) {
-        output.innerHTML += "⚠️ Error: " + e.message;
+        printError("⚠️ Error: " + e.message);
         console.error(e);
       }
     </script>
