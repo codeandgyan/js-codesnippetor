@@ -35,4 +35,6 @@
   --color-fg3: #d4d4d4; /* Main editor text (VS Code style) */
   --color-fg4: #e5e5e5; /* Bright titles, headings */
   --color-fg5: #ffffff; /* Pure white for maximum contrast */
+
+  --color-error-light: #f87171; /* Error color */
 }
