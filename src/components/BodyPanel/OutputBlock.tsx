@@ -17,11 +17,11 @@ function OutputBlock({ id, code }: Readonly<Props>) {
   }, [executeCode, code, id]);
 
   return (
-    <div className="max-h-40 overflow-y-auto flex shadow-lg rounded-b-lg">
+    <div className="max-h-40 overflow-y-auto flex shadow-lg rounded-b-lg pb-1">
       <div className="w-12 place-items-center px-2">
         <MessageSquareCode className="" />
       </div>
-      <div className="flex flex-col w-full px-[10px] pb-1">
+      <div className="flex flex-col w-full px-[10px]">
         {results?.map((result) => {
           if (lines > 1 && result.message === "undefined") {
             return null;

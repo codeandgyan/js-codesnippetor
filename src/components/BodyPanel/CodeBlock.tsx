@@ -1,7 +1,7 @@
 import Editor, { type OnMount } from "@monaco-editor/react";
 import * as monacoEditor from "monaco-editor";
 import type { Cell } from "../../types/cell";
-import { Play } from "lucide-react";
+import { ArrowDown, ArrowUp, ClipboardCopy, Play, Trash2 } from "lucide-react";
 import { useRef, useState } from "react";
 import OutputBlock from "./OutputBlock";
 
@@ -9,7 +9,7 @@ type Props = {
   item: Cell;
 };
 
-const minHeight = 24;
+const minHeight = 40;
 const lineHeight = 20;
 
 function CodeBlock({ item }: Readonly<Props>) {
@@ -20,6 +20,7 @@ function CodeBlock({ item }: Readonly<Props>) {
   const [editorHeight, setEditorHeight] = useState<number>(minHeight);
   const content = useRef(item.content);
   const [code, setCode] = useState(item.content);
+  const [showActions, setShowActions] = useState(false);
 
   const onMount: OnMount = (editor, monaco) => {
     editorRef.current = editor;
@@ -69,7 +70,39 @@ function CodeBlock({ item }: Readonly<Props>) {
             <Play className="w-4 h-4 text-fg4 hover:text-fg5 cursor-pointer" />
           </button>
         </div>
-        <div className="flex-1 bg-bg1 py-2">
+        <div
+          className="relative flex-1 bg-bg1 py-2"
+          onMouseEnter={() => setShowActions(true)}
+          onMouseLeave={() => setShowActions(false)}
+        >
+          {showActions && (
+            <div className="z-10 absolute right-10 -top-3 flex gap-2 bg-bg6 shadow-lg rounded-sm px-2 py-0.5 text-fg2">
+              <button
+                className="cursor-pointer rounded-full hover:bg-bg4 p-1"
+                title="Copy Code"
+              >
+                <ClipboardCopy size={18} />
+              </button>
+              <button
+                className="cursor-pointer rounded-full hover:bg-bg4 p-1"
+                title="Move Up"
+              >
+                <ArrowUp size={18} />
+              </button>
+              <button
+                className="cursor-pointer rounded-full hover:bg-bg4 p-1"
+                title="Move Down"
+              >
+                <ArrowDown size={18} />
+              </button>
+              <button
+                className="cursor-pointer rounded-full hover:bg-bg4 p-1"
+                title="Delete Cell"
+              >
+                <Trash2 size={18} />
+              </button>
+            </div>
+          )}
           <Editor
             onChange={(e) => onChange(e || "")}
             onMount={onMount}
