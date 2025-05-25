@@ -1,7 +1,7 @@
 import Editor, { type OnMount } from "@monaco-editor/react";
 import * as monacoEditor from "monaco-editor";
 import type { Block } from "../../types/block";
-import { ArrowDown, ArrowUp, ClipboardCopy, Play, Trash2 } from "lucide-react";
+import { ArrowDown, ArrowUp, Copy, Play, Trash2 } from "lucide-react";
 import { useRef, useState } from "react";
 import OutputBlock from "./OutputBlock";
 
@@ -81,7 +81,7 @@ function CodeBlock({ item }: Readonly<Props>) {
                 className="cursor-pointer rounded-full hover:bg-bg4 p-1"
                 title="Copy Code"
               >
-                <ClipboardCopy size={18} />
+                <Copy size={18} />
               </button>
               <button
                 className="cursor-pointer rounded-full hover:bg-bg4 p-1"
