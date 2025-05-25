@@ -4,10 +4,10 @@ import BodyPanel from "./components/BodyPanel/BodyPanel";
 import SideBar from "./components/SideBar";
 import Header from "./components/Header";
 import { useState } from "react";
-import type { Cell } from "./types/cell";
+import type { Block } from "./types/block";
 
 function App() {
-  const [items, setItems] = useState<Cell[]>([
+  const [items, setItems] = useState<Block[]>([
     {
       id: "yk2bcd",
       type: "code",
@@ -22,7 +22,7 @@ function App() {
     setItems((prev) => {
       const newItems = [
         ...prev,
-        { id: newId, type, content: "", language: "javascript" } as Cell,
+        { id: newId, type, content: "", language: "javascript" } as Block,
       ];
       return newItems;
     });

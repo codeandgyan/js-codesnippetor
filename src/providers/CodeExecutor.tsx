@@ -29,21 +29,21 @@ function CodeExecutor({ children }: Readonly<Props>) {
 
   const executeCode = useCallback((code: string, cellId: string) => {
     setIsExecuting(true);
-    let parsedCode = code.replace(
-      /\b(const|let|var)\s+(\w+)/g,
-      (_, _type, name) => "scope." + name
-    );
+    // let parsedCode = code.replace(
+    //   /\b(const|let|var)\s+(\w+)/g,
+    //   (_, _type, name) => "scope." + name
+    // );
 
-    parsedCode = parsedCode.replace(
-      /function\s+([a-zA-Z_$][\w$]*)\s*\(([^)]*)\)\s*\{([\s\S]*?)\}/g,
-      (_, name, args, body) =>
-        "scope." + name + " = function(" + args + ") {" + body + "}"
-    );
+    // parsedCode = parsedCode.replace(
+    //   /function\s+([a-zA-Z_$][\w$]*)\s*\(([^)]*)\)\s*\{([\s\S]*?)\}/g,
+    //   (_, name, args, body) =>
+    //     "scope." + name + " = function(" + args + ") {" + body + "}"
+    // );
     const iframe = iframeRef.current;
     if (iframe) {
       const message = {
         type: "run-code",
-        code: parsedCode,
+        code: code,
         cellId,
       };
       iframe.contentWindow?.postMessage(message, "*");
@@ -55,12 +55,13 @@ function CodeExecutor({ children }: Readonly<Props>) {
       if (event.data?.type === "code-output") {
         // console.log("Code Output", event.data);
         const { outputs } = event.data;
-        setCodeOutputMap((prev) => {
-          return {
-            ...prev,
-            ...outputs,
-          };
-        });
+        // setCodeOutputMap((prev) => {
+        //   return {
+        //     ...prev,
+        //     ...outputs,
+        //   };
+        // });
+        setCodeOutputMap(outputs);
 
         setIsExecuting(false);
       }

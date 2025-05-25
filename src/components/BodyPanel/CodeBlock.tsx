@@ -1,12 +1,12 @@
 import Editor, { type OnMount } from "@monaco-editor/react";
 import * as monacoEditor from "monaco-editor";
-import type { Cell } from "../../types/cell";
+import type { Block } from "../../types/block";
 import { ArrowDown, ArrowUp, ClipboardCopy, Play, Trash2 } from "lucide-react";
 import { useRef, useState } from "react";
 import OutputBlock from "./OutputBlock";
 
 type Props = {
-  item: Cell;
+  item: Block;
 };
 
 const minHeight = 40;

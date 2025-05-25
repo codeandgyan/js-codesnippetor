@@ -1,11 +1,11 @@
 import React from "react";
-import type { Cell } from "../../types/cell";
+import type { Block } from "../../types/block";
 import CodeBlock from "./CodeBlock";
 import Separator from "./Separator";
 import CodeExecutor from "../../providers/CodeExecutor";
 
 type Props = {
-  items: Cell[];
+  items: Block[];
   onAddBlock: (currentCellId: string, type: string) => void;
 };
 

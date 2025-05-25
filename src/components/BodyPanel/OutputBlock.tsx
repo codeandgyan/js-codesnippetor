@@ -5,11 +5,11 @@ import useCodeExecutor from "../../hooks/useExecutor";
 type Props = {
   id: string;
   code: string;
+  changeVersion?: number;
 };
 function OutputBlock({ id, code }: Readonly<Props>) {
   const { executeCode, codeOutputMap } = useCodeExecutor();
   const results = codeOutputMap?.[id] || [];
-  const lines = results?.length || 0;
 
   useEffect(() => {
     if (!code || !id) return;
@@ -23,15 +23,12 @@ function OutputBlock({ id, code }: Readonly<Props>) {
       </div>
       <div className="flex flex-col w-full px-[10px]">
         {results?.map((result) => {
-          if (lines > 1 && result.message === "undefined") {
-            return null;
-          }
           return (
             <p
               key={result.messageId}
               className={`font-consolas text-sm ${
                 result.isError ? "text-red-500" : "text-fg5"
-              }`}
+              } ${result.message === "undefined" ? "!text-fg0/80" : ""}`}
             >
               {result.message}
             </p>

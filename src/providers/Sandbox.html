@@ -1,50 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script>
-      // Persist scope object
-      const scope = {};
-    </script>
+    <meta charset="UTF-8" />
   </head>
   <body>
     <div id="output"></div>
-    <script>
-      function showOutput(message) {
-        const outputElement = document.getElementById("output");
-        outputElement.innerHTML += message + "<br>";
-      }
-    </script>
 
     <script>
+      // Global variables
       let id;
       let outputs = {};
+      const log = console.log;
 
       function parseResult(...args) {
         const message = args
           .map((arg) => {
-            if (typeof arg === "object") {
-              return JSON.stringify(arg, null);
-              // If you want to format the JSON nicely, uncomment the line below
-              // return JSON.stringify(arg, null, 2);
+            try {
+              return typeof arg === "object"
+                ? JSON.stringify(arg)
+                : String(arg);
+            } catch {
+              return String(arg);
             }
-            return String(arg);
           })
           .join(" ");
         return message;
       }
 
-      function display(...args) {
-        const message = parseResult(...args);
-        showOutput(message);
+      function printOutput(message, isError = false) {
         if (outputs[id]) {
           outputs[id].push({
             message,
-            isError: false,
+            isError: isError,
             messageId: crypto.randomUUID(),
           });
         } else {
           outputs[id] = [
-            { message, isError: false, messageId: crypto.randomUUID() },
+            { message, isError: isError, messageId: crypto.randomUUID() },
           ];
         }
         parent.postMessage(
@@ -54,90 +46,74 @@
           },
           "*"
         );
+      }
+
+      function display(...args) {
+        const message = parseResult(...args);
+        printOutput(message);
       }
 
       function displayError(...args) {
         const message = parseResult(...args);
-        showOutput(message);
-        if (outputs[id]) {
-          outputs[id].push({
-            message,
-            isError: true,
-            messageId: crypto.randomUUID(),
-          });
-        } else {
-          outputs[id] = [
-            { message, isError: true, messageId: crypto.randomUUID() },
-          ];
-        }
-        parent.postMessage(
-          {
-            type: "code-output",
-            outputs: outputs,
-          },
-          "*"
-        );
+        printOutput(message, true);
       }
-    </script>
 
-    <script>
-      const log = console.log;
-      console.log = function (...args) {
-        log.apply(console, args);
-        display(...args);
-      };
-    </script>
+      function registerConsole() {
+        console.log = function (...args) {
+          log.apply(console, args);
+          display(...args);
+        };
+      }
 
-    <script>
-      try {
-        function runCell(code) {
-          outputs = {};
-          try {
-            const scopedCode = `
-                (function(scope) {
-                    with (scope) {
-                        ${code}
-                    }
-                })(scope);
-            `;
+      function deregisterConsole() {
+        console.log = () => {};
+      }
 
-            eval(scopedCode);
+      function updateDOM(code) {
+        deregisterConsole();
+        const scriptId = `script-${id}`;
 
-            // ---------------
-            if (!outputs[id]) {
-              outputs[id] = [];
-            }
-            outputs[id].push({
-              message: "undefined",
-              isError: false,
-              messageId: crypto.randomUUID(),
-            });
-            parent.postMessage(
-              {
-                type: "code-output",
-                outputs: outputs,
-              },
-              "*"
-            );
-            // ---------------
-          } catch (err) {
-            console.error(err);
-            displayError("❌", err.toString());
-          }
+        // Check if the script already exists
+        const existingScriptBlock = document.getElementById(scriptId);
+        if (existingScriptBlock) {
+          existingScriptBlock.remove(); // Remove it from the DOM
         }
 
-        window.addEventListener("message", (event) => {
-          const { type } = event.data;
-          if (type === "run-code") {
-            const { code, cellId } = event.data;
-            id = cellId;
-            runCell(code);
-          }
-        });
-      } catch (e) {
-        console.error(e);
-        displayError("⚠️ Error: " + e.message);
+        // Create a new script block
+        const scriptBlock = document.createElement("script");
+        scriptBlock.type = "text/javascript";
+        scriptBlock.id = scriptId;
+        scriptBlock.textContent = code;
+
+        // Append the new script to the body to execute it
+        document.body.appendChild(scriptBlock);
       }
+
+      async function runCode(code) {
+        try {
+          registerConsole();
+          outputs[id] = [];
+          const result = await (0, eval)(code);
+          const output = parseResult(result);
+          display(`${output}`);
+          updateDOM(code);
+        } catch (err) {
+          console.error("❌", err);
+          displayError("❌ " + err.toString());
+        }
+      }
+
+      function show(message) {
+        console.log(message);
+      }
+
+      window.addEventListener("message", async (event) => {
+        const { type, code, cellId } = event.data;
+        if (type === "run-code") {
+          id = cellId;
+          await runCode(code);
+        }
+      });
     </script>
   </body>
 </html>
