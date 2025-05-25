@@ -33,7 +33,7 @@ function App() {
       <div className="flex-0">
         <Header />
       </div>
-      <div className="flex-1 flex mt-14">
+      <div className="flex-1 flex mt-16">
         <SideBar />
         <BodyPanel
           items={items}

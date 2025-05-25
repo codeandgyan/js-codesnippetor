@@ -13,7 +13,7 @@ function BodyPanel({ items, onAddBlock }: Readonly<Props>) {
   return (
     <CodeExecutor>
       <div className="bg-bg5 w-full text-fg3 overflow-y-auto">
-        <div className="flex flex-col gap-4 h-full p-5">
+        <div className="flex flex-col gap-4 h-full p-5 lg:px-20">
           {items.map((item) => (
             <React.Fragment key={item.id}>
               <div className="relative mb-5">
